@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <script src="./node_modules/jsbi/dist/jsbi-umd.js"></script>
+  <script src="test-transformed.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+      const form = document.querySelector("form");
+      form.oninput = function () {
+        const value = form.value.value;
+        const digits = Number(form.digits.value);
+        const s = squareRoot(value, digits);
+        // IE 11 does not support <output> element, so `form.output.value = "value";` is not working.
+        form.querySelector("output").textContent = '√' + value +  ' ≈ ' + s.slice(0, 0 - digits - 1) + '.' + s.slice(0 - digits - 1, -1) + '…';
+      };
+      form.oninput();
+    }, false);
+  </script>
+  <style>
+    output {
+      overflow-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <form>
+    <div>
+      <label for="value">Value:</label>
+      <input id="value" name="value" type="number" min="2" step="1" value="2" />
+    </div>
+    <div>
+      <label for="digits">Number of decimal digits:</label>
+      <input id="digits" name="digits" type="number" min="1" step="1" value="100" />
+    </div>
+    <div>
+      <output id="output" name="output" for="value digits" tabindex="0"></output>
+    </div>
+  </form>
+</body>
+</html>
