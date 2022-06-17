@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { TxMeta, TxState, TxStatus } from './types';
+import { TxMeta, TxState, TxStatus } from '../types';
 
 // By default - toJSON method returns a string and we override it with our implementation that
 // returns other type so we need to ignore the error
